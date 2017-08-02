@@ -67,6 +67,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModuleGlobal.vb" />
     <Compile Include="ProduccionDS.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

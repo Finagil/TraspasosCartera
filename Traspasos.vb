@@ -5,27 +5,28 @@ Module Traspasos
     Dim Tasa As Decimal
     Dim Contador As Integer = 0
     Dim AplicaGarantiaLIQ As String
-
-
+    Dim FechaS As String = Date.Now.ToString("yyyyMMdd")
+    Dim FechaD As DateTime = Date.Now.Date
+    Dim DS As New ProduccionDS
+    Dim Vencido As Boolean = False
+    Dim TaTrasp As New ProduccionDSTableAdapters.TraspasosVencidosTableAdapter
 
     Sub Main()
         Console.WriteLine("Iniciando ...")
-        Dim Fecha As String = Date.Now.ToString("yyyyMMdd")
-        Dim FechaD As DateTime = Date.Now.Date
-
+        Console.WriteLine("Cartera Vencida ...")
         TraspasoCarteraVencida(FechaD)
         'Fecha = "20150506" 'PARA PRUEBAS
         Console.WriteLine("Procesando Avio Paso 1 ...")
-        Calcula_Saldos(Fecha, "H")
+        Calcula_Saldos(FechaS, "H")
         Console.WriteLine("Procesando Avio Paso 2 ...")
-        TraspasosAvio(Fecha, "H")
+        TraspasosAvio(FechaS, "H")
         'Fecha = "20150506" 'PARA PRUEBAS
         Console.WriteLine("Procesando CC Paso 1...")
-        Calcula_Saldos(Fecha, "C")
+        Calcula_Saldos(FechaS, "C")
         Console.WriteLine("Procesando CC Paso 2...")
-        TraspasosAvio(Fecha, "C")
+        TraspasosAvio(FechaS, "C")
         Console.WriteLine("Terminado ...")
-        EnviaError("ecacerest@lamoderna.com.mx", "Ejecucion de Traspasos " & Fecha & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
+        EnviaError("ecacerest@lamoderna.com.mx", "Ejecucion de Traspasos " & FechaS & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
     End Sub
 
     Sub TraspasosAvio(Fecha As String, Tipo As String)
@@ -134,34 +135,163 @@ Module Traspasos
 
     Sub TraspasoCarteraVencida(Fecha As DateTime)
         Dim TaVenc As New ProduccionDSTableAdapters.CarteraVencidaDETTableAdapter
-        Dim TaTrasp As New ProduccionDSTableAdapters.TraspasosVencidosTableAdapter
-        Dim DS As New ProduccionDS
         Dim FechaAPP As DateTime = TaVenc.FechaAplicacion
         Dim RR As ProduccionDS.TraspasosVencidosRow
+
         FechaAPP = FechaAPP.AddDays(-1)
+        'FechaAPP = FechaAPP.AddDays(35)
         TaVenc.Fill(DS.CarteraVencidaDET, FechaAPP)
         For Each r As ProduccionDS.CarteraVencidaDETRow In DS.CarteraVencidaDET.Rows
+            Console.WriteLine("Cartera Vencida " & r.AnexoCon)
+            Vencido = False
             Select Case r.TipoCredito.Trim
                 Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "FULL SERVICE", "ARRENDAMIENTO PURO"
                     If r.Dias >= 30 Then
                         RR = DS.TraspasosVencidos.NewRow
+                        Select Case r.TipoCredito.Trim
+                            Case "ANTICIPO AVÍO", "CREDITO DE AVÍO"
+                                TraspasaAVCC(RR, r)
+                            Case "FULL SERVICE", "ARRENDAMIENTO PURO"
+                                TraspasaTRA(RR, r)
+                        End Select
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
                 Case "CUENTA CORRIENTE"
                     If r.Dias >= 60 Then
                         RR = DS.TraspasosVencidos.NewRow
+                        TraspasaAVCC(RR, r)
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
                 Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE"
                     If r.Dias >= 90 Then
                         RR = DS.TraspasosVencidos.NewRow
+                        TraspasaTRA(RR, r)
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
             End Select
+            If Vencido = True Then
+                DS.TraspasosVencidos.GetChanges()
+                TaTrasp.Update(DS.TraspasosVencidos)
+                Select Case r.TipoCredito.Trim
+                    Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
+                        'TaVenc.MarcaVencidaAV(r.Anexo)
+                    Case Else
+                        'TaVenc.MarcaVencidaTRA(r.Anexo)
+                End Select
+            End If
         Next
-
-
-
     End Sub
+
+    Sub TraspasaTRA(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)
+        TaTrasp.DeleteAnexo(r.Anexo)
+        Dim EdoV As New ProduccionDSTableAdapters.EdoctavTableAdapter
+        Dim EdoS As New ProduccionDSTableAdapters.EdoctasTableAdapter
+        Dim EdoO As New ProduccionDSTableAdapters.EdoctaoTableAdapter
+        EdoV.Fill(DS.Edoctav, r.Anexo)
+        EdoS.Fill(DS.Edoctas, r.Anexo)
+        EdoO.Fill(DS.Edoctao, r.Anexo)
+
+        RR.Anexo = r.Anexo
+        RR.Ciclo = ""
+        RR.Tipo = r.Tipo
+        RR.Fecha = FechaD
+        RR.Tipar = r.Tipar
+        RR.Segmento_Negocio = r.Segmento_Negocio
+
+        If DS.Edoctav.Rows.Count > 0 Then
+            RR.SaldoInsoluto = DS.Edoctav.Rows(0).Item("Capital")
+            RR.CargaFinanciera = DS.Edoctav.Rows(0).Item("Interes")
+        Else
+            RR.SaldoInsoluto = 0
+            RR.CargaFinanciera = 0
+        End If
+        If DS.Edoctas.Rows.Count > 0 Then
+            RR.SaldoInsolutoSEG = DS.Edoctas.Rows(0).Item("Capital")
+            RR.CargaFinancieraSEG = DS.Edoctas.Rows(0).Item("Interes")
+        Else
+            RR.SaldoInsolutoSEG = 0
+            RR.CargaFinancieraSEG = 0
+        End If
+        If DS.Edoctao.Rows.Count > 0 Then
+            RR.SaldoInsolutoOTR = DS.Edoctao.Rows(0).Item("Capital")
+            RR.CargaFinancieraOTR = DS.Edoctao.Rows(0).Item("Interes")
+        Else
+            RR.SaldoInsolutoOTR = 0
+            RR.CargaFinancieraOTR = 0
+        End If
+
+        RR.CapitalVencido = 0
+        RR.InteresVencido = 0
+        RR.CapitalVencidoOt = 0
+        RR.InteresVencidoOt = 0
+        RR.IvaCapital = 0
+        Dim Fact As New ProduccionDSTableAdapters.FacturasTableAdapter
+        Fact.Fill(DS.Facturas, r.Anexo)
+        Dim Pagado, Capital, Interes, InteresOt, CapitalOt, IvaCpital, IntereSEG As Decimal
+
+        For Each w As ProduccionDS.FacturasRow In DS.Facturas.Rows
+            If r.Tipar = "P" Then
+                IntereSEG = w.IntSe
+                Capital = (w.RenPr - w.IntPr) + w.RenSe + w.ImporteFEGA + w.SeguroVida + w.IntPr
+                Interes = 0
+            Else
+                IntereSEG = 0
+                Capital = (w.RenPr - w.IntPr) + w.RenSe + w.ImporteFEGA + w.SeguroVida
+                Interes = w.IntPr + w.IntSe
+            End If
+
+            CapitalOt = w.CapitalOt
+            InteresOt = w.InteresOt
+            IvaCpital = w.IvaCapital + w.IvaPr + w.IvaSe + w.IvaOt
+            Pagado = w.ImporteFac - w.SaldoFac
+
+            If w.SaldoFac <> w.ImporteFac Then
+                AplicaSaldos(AplicaPagoAnterior(AplicaPrelacion(w, r.Tipar), Pagado), Capital, CapitalOt, Interes, InteresOt, IvaCpital)
+            End If
+
+
+            RR.IvaCapital += IvaCpital
+            RR.CapitalVencido += Capital
+            RR.InteresVencido += Interes
+            RR.CapitalVencidoOt += CapitalOt
+            RR.InteresVencidoOt += InteresOt
+            If IntereSEG > 0 Then RR.CargaFinancieraSEG += IntereSEG
+        Next
+        Vencido = True
+    End Sub
+
+    Sub TraspasaAVCC(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)
+        RR.Anexo = r.Anexo
+        RR.Ciclo = ""
+        RR.Tipo = r.Tipo
+        RR.Fecha = FechaD
+        RR.Tipar = r.Tipar
+        RR.Segmento_Negocio = r.Segmento_Negocio
+        RR.SaldoInsolutoOTR = 0
+        RR.CargaFinancieraOTR = 0
+        RR.SaldoInsolutoSEG = 0
+        RR.CargaFinancieraSEG = 0
+        RR.SaldoInsoluto = 0
+        RR.CargaFinanciera = 0
+        RR.CapitalVencido = 0
+        RR.InteresVencido = 0
+        RR.CapitalVencidoOt = 0
+        RR.InteresVencidoOt = 0
+        RR.IvaCapital = 0
+
+        Dim TaAV As New ProduccionDSTableAdapters.SaldosAvioTableAdapter
+        TaAV.Fill(DS.SaldosAvio, r.Anexo)
+        Dim Capital, Interes As Decimal
+
+        For Each w As ProduccionDS.SaldosAvioRow In DS.SaldosAvio.Rows
+            Capital = w.Imp + w.Fega + w.Garantia
+            Interes = w.Intereses
+            RR.CapitalVencido += Capital
+            RR.InteresVencido += Interes
+        Next
+        Vencido = True
+    End Sub
+
+
 
 End Module
