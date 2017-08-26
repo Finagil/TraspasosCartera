@@ -139,7 +139,6 @@ Module Traspasos
         Dim RR As ProduccionDS.TraspasosVencidosRow
 
         FechaAPP = FechaAPP.AddDays(-1)
-        'FechaAPP = FechaAPP.AddDays(35)
         TaVenc.Fill(DS.CarteraVencidaDET, FechaAPP)
         For Each r As ProduccionDS.CarteraVencidaDETRow In DS.CarteraVencidaDET.Rows
             Console.WriteLine("Cartera Vencida " & r.AnexoCon)
@@ -174,9 +173,9 @@ Module Traspasos
                 TaTrasp.Update(DS.TraspasosVencidos)
                 Select Case r.TipoCredito.Trim
                     Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
-                        'TaVenc.MarcaVencidaAV(r.Anexo)
+                        TaVenc.MarcaVencidaAV(r.Anexo)
                     Case Else
-                        'TaVenc.MarcaVencidaTRA(r.Anexo)
+                        TaVenc.MarcaVencidaTRA(r.Anexo)
                 End Select
             End If
         Next

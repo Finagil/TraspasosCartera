@@ -8452,8 +8452,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8802,8 +8802,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9438,8 +9438,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9656,8 +9656,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9899,8 +9899,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10430,8 +10430,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11298,8 +11298,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11567,8 +11567,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11757,8 +11757,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12119,8 +12119,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12344,8 +12344,8 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = "Data Source=server-raid;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
-                "r ID=User_PRO;Password=User_PRO2015"
+            Me._connection.ConnectionString = "Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security I"& _ 
+                "nfo=True;User ID=User_PRO;Password=User_PRO2015"
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12355,8 +12355,8 @@ Namespace ProduccionDSTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        Anexo, Tipar, Tipo, DiasAvio, Imp, Fega, Garantia, Intereses, Saldo"& _ 
-                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Vw_SaldosAvio"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Tipar = N'H') AND (Anexo = @Anexo"& _ 
-                ")"
+                ""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Vw_SaldosAvio"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Tipar = N'H' OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
+                "         Tipar = N'A') AND (Anexo = @Anexo)"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anexo", Global.System.Data.SqlDbType.NChar, 9, Global.System.Data.ParameterDirection.Input, 0, 0, "Anexo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
