@@ -4,12 +4,12 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection ConnectionStringObject="Data Source=SERVER-MINDS\TEST_MINDS;Initial Catalog=Production;Persist Security Info=True;User ID=User_PRO;Password=User_PRO2015" IsAppSettingsProperty="false" Modifier="Assembly" Name="server-raid.Production.dbo2" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="Production_Aux2CS" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Production_Aux2CS (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.TraspasosCartera.My.MySettings.GlobalReference.Default.Production_Aux2CS" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SaldosAvioCCTableAdapter" GeneratorDataComponentClassName="SaldosAvioCCTableAdapter" Name="SaldosAvioCC" UserDataComponentName="SaldosAvioCCTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Vw_CONT_SaldosAvioCC" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillAvio" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataAvio" GeneratorSourceName="FillAvio" GetMethodModifier="Public" GetMethodName="GetDataAvio" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataAvio" UserSourceName="FillAvio">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Vw_CONT_SaldosAvioCC" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillAvio" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataAvio" GeneratorSourceName="FillAvio" GetMethodModifier="Public" GetMethodName="GetDataAvio" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataAvio" UserSourceName="FillAvio">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Anexo, Ciclo, Cliente, Imp, Fega, Garantia, Intereses, Saldo, AnexoCon, Tipta, Tasas, DiferencialFINAGIL, CicloPagare, FechaFinal, FechaTerminacion, Descr, Tipar
@@ -44,7 +44,7 @@ ORDER BY FechaTerminacion, Anexo, Ciclo</CommandText>
               <Mapping SourceColumn="Tipar" DataSetColumn="Tipar" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Vw_CONT_SaldosAvioCC" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillCC" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataCC" GeneratorSourceName="FillCC" GetMethodModifier="Public" GetMethodName="GetDataCC" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataCC" UserSourceName="FillCC">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Vw_CONT_SaldosAvioCC" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillCC" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataCC" GeneratorSourceName="FillCC" GetMethodModifier="Public" GetMethodName="GetDataCC" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataCC" UserSourceName="FillCC">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Anexo, AnexoCon, Ciclo, CicloPagare, Cliente, Descr, DiferencialFINAGIL, FechaFinal, FechaTerminacion, Fega, Garantia, Imp, Intereses, Saldo, Tasas, Tipar, Tipta
@@ -61,7 +61,7 @@ ORDER BY FechaTerminacion, Anexo, AnexoCon</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TraspasosAvioCCTableAdapter" GeneratorDataComponentClassName="TraspasosAvioCCTableAdapter" Name="TraspasosAvioCC" UserDataComponentName="TraspasosAvioCCTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.CONT_TraspasosAvioCC" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production_AUX2.dbo.CONT_TraspasosAvioCC" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [CONT_TraspasosAvioCC] WHERE (([id_Traspaso] = @Original_id_Traspaso) AND ((@IsNull_Anexo = 1 AND [Anexo] IS NULL) OR ([Anexo] = @Original_Anexo)) AND ((@IsNull_Ciclo = 1 AND [Ciclo] IS NULL) OR ([Ciclo] = @Original_Ciclo)) AND ((@IsNull_SaldoAdeudo = 1 AND [SaldoAdeudo] IS NULL) OR ([SaldoAdeudo] = @Original_SaldoAdeudo)) AND ((@IsNull_Importe = 1 AND [Importe] IS NULL) OR ([Importe] = @Original_Importe)) AND ((@IsNull_Intereses = 1 AND [Intereses] IS NULL) OR ([Intereses] = @Original_Intereses)) AND ((@IsNull_GarantiaLiq = 1 AND [GarantiaLiq] IS NULL) OR ([GarantiaLiq] = @Original_GarantiaLiq)) AND ((@IsNull_Tipar = 1 AND [Tipar] IS NULL) OR ([Tipar] = @Original_Tipar)) AND ((@IsNull_Fega = 1 AND [Fega] IS NULL) OR ([Fega] = @Original_Fega)) AND ((@IsNull_Fecha = 1 AND [Fecha] IS NULL) OR ([Fecha] = @Original_Fecha)) AND ((@IsNull_InteresesDias = 1 AND [InteresesDias] IS NULL) OR ([InteresesDias] = @Original_InteresesDias)))</CommandText>
@@ -115,7 +115,7 @@ FROM            CONT_TraspasosAvioCC
 WHERE        (Fecha = @Fecha)
 ORDER BY Anexo, Ciclo</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="Fecha" ColumnName="Fecha" DataSourceName="Production.dbo.CONT_TraspasosAvioCC" DataTypeServer="nchar(8)" DbType="String" Direction="Input" ParameterName="@Fecha" Precision="0" ProviderType="NChar" Scale="0" Size="8" SourceColumn="Fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="Fecha" ColumnName="Fecha" DataSourceName="Production_AUX2.dbo.CONT_TraspasosAvioCC" DataTypeServer="nchar(8)" DbType="String" Direction="Input" ParameterName="@Fecha" Precision="0" ProviderType="NChar" Scale="0" Size="8" SourceColumn="Fecha" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </SelectCommand>
@@ -155,7 +155,7 @@ SELECT id_Traspaso, Anexo, Ciclo, SaldoAdeudo, Importe, Intereses, GarantiaLiq, 
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="StringFixedLength" Direction="Input" ParameterName="@Original_Fecha" Precision="0" ProviderType="NChar" Scale="0" Size="0" SourceColumn="Fecha" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_InteresesDias" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="InteresesDias" SourceColumnNullMapping="true" SourceVersion="Original" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_InteresesDias" Precision="11" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="InteresesDias" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="id_Traspaso" ColumnName="id_Traspaso" DataSourceName="Production.dbo.CONT_TraspasosAvioCC" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@id_Traspaso" Precision="18" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="id_Traspaso" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="id_Traspaso" ColumnName="id_Traspaso" DataSourceName="Production_AUX2.dbo.CONT_TraspasosAvioCC" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@id_Traspaso" Precision="18" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="id_Traspaso" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -175,7 +175,7 @@ SELECT id_Traspaso, Anexo, Ciclo, SaldoAdeudo, Importe, Intereses, GarantiaLiq, 
               <Mapping SourceColumn="Importe" DataSetColumn="Importe" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteFechaAvio" Modifier="Public" Name="DeleteFechaAvio" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteFechaAvio">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteFechaAvio" Modifier="Public" Name="DeleteFechaAvio" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteFechaAvio">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM CONT_TraspasosAvioCC
@@ -186,7 +186,7 @@ WHERE        (Fecha = @Fecha) AND (Tipar &lt;&gt; N'C')</CommandText>
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteFechaCC" Modifier="Public" Name="DeleteFechaCC" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteFechaCC">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteFechaCC" Modifier="Public" Name="DeleteFechaCC" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="DeleteFechaCC">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM CONT_TraspasosAvioCC
@@ -201,7 +201,7 @@ WHERE        (Fecha = @Fecha) AND (Tipar = N'C')</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TIIEpromedioTableAdapter" GeneratorDataComponentClassName="TIIEpromedioTableAdapter" Name="TIIEpromedio" UserDataComponentName="TIIEpromedioTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Vw_TIIEpromedio" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Vw_TIIEpromedio" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT        Mes, Promedio
@@ -216,7 +216,7 @@ FROM            Vw_TIIEpromedio</CommandText>
               <Mapping SourceColumn="Promedio" DataSetColumn="Promedio" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.SacaTIIE" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SacaTIIE" Modifier="Public" Name="SacaTIIE" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="SacaTIIE">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.SacaTIIE" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="SacaTIIE" Modifier="Public" Name="SacaTIIE" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="SacaTIIE">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.SacaTIIE</CommandText>
@@ -231,7 +231,7 @@ FROM            Vw_TIIEpromedio</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="AviosTableAdapter" GeneratorDataComponentClassName="AviosTableAdapter" Name="Avios" UserDataComponentName="AviosTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Avios" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillAnexo" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataAnexo" GeneratorSourceName="FillAnexo" GetMethodModifier="Public" GetMethodName="GetDataAnexo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataAnexo" UserSourceName="FillAnexo">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Avios" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillAnexo" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetDataAnexo" GeneratorSourceName="FillAnexo" GetMethodModifier="Public" GetMethodName="GetDataAnexo" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetDataAnexo" UserSourceName="FillAnexo">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT        Tipta, DiferencialFINAGIL, Fondeo, Tipar, FechaTerminacion, Tasas, SeguroVida, AplicaGarantiaLIQ
@@ -256,7 +256,7 @@ WHERE        (Anexo = @Anexo) AND (Ciclo = @Ciclo)</CommandText>
               <Mapping SourceColumn="AplicaGarantiaLIQ" DataSetColumn="AplicaGarantiaLIQ" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateAplicaGAR" Modifier="Public" Name="UpdateAplicaGAR" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="UpdateAplicaGAR">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateAplicaGAR" Modifier="Public" Name="UpdateAplicaGAR" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="UpdateAplicaGAR">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>UPDATE       Avios
@@ -271,7 +271,7 @@ WHERE        (AplicaGarantiaLIQ IS NULL OR
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CarteraVencidaDETTableAdapter" GeneratorDataComponentClassName="CarteraVencidaDETTableAdapter" Name="CarteraVencidaDET" UserDataComponentName="CarteraVencidaDETTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Sp_Monitor_Cartera_Vencida_DET" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Sp_Monitor_Cartera_Vencida_DET" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.Sp_Monitor_Cartera_Vencida_DET</CommandText>
@@ -305,7 +305,7 @@ WHERE        (AplicaGarantiaLIQ IS NULL OR
               <Mapping SourceColumn="Segmento_Negocio" DataSetColumn="Segmento_Negocio" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="FechaAplicacion" Modifier="Public" Name="FechaAplicacion" QueryType="Scalar" ScalarCallRetval="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FechaAplicacion">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="FechaAplicacion" Modifier="Public" Name="FechaAplicacion" QueryType="Scalar" ScalarCallRetval="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FechaAplicacion">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        MAX(Fecha) AS FechaAplicacion
@@ -315,7 +315,7 @@ WHERE        (Estatus = 'Vigente')</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="MarcaVencidaAV" Modifier="Public" Name="MarcaVencidaAV" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="MarcaVencidaAV">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="MarcaVencidaAV" Modifier="Public" Name="MarcaVencidaAV" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="MarcaVencidaAV">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       Avios
@@ -327,7 +327,7 @@ WHERE        (Anexo = @Anexo)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="MarcaVencidaTRA" Modifier="Public" Name="MarcaVencidaTRA" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="MarcaVencidaTRA">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="MarcaVencidaTRA" Modifier="Public" Name="MarcaVencidaTRA" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="MarcaVencidaTRA">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE       Anexos
@@ -339,7 +339,7 @@ WHERE        (Anexo = @Anexo)</CommandText>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Anexos" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="MensualidadFullService" Modifier="Public" Name="MensualidadFullService" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="MensualidadFullService">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Anexos" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="MensualidadFullService" Modifier="Public" Name="MensualidadFullService" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="MensualidadFullService">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Mensu
@@ -355,7 +355,7 @@ WHERE        (Anexo = @Anexo)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TraspasosVencidosTableAdapter" GeneratorDataComponentClassName="TraspasosVencidosTableAdapter" Name="TraspasosVencidos" UserDataComponentName="TraspasosVencidosTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.CONT_TraspasosVencidos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.CONT_TraspasosVencidos" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [CONT_TraspasosVencidos] WHERE (([id_TraspasoVen] = @Original_id_TraspasoVen) AND ((@IsNull_Anexo = 1 AND [Anexo] IS NULL) OR ([Anexo] = @Original_Anexo)) AND ((@IsNull_Ciclo = 1 AND [Ciclo] IS NULL) OR ([Ciclo] = @Original_Ciclo)) AND ((@IsNull_Tipar = 1 AND [Tipar] IS NULL) OR ([Tipar] = @Original_Tipar)) AND ((@IsNull_Fecha = 1 AND [Fecha] IS NULL) OR ([Fecha] = @Original_Fecha)) AND ((@IsNull_SaldoInsoluto = 1 AND [SaldoInsoluto] IS NULL) OR ([SaldoInsoluto] = @Original_SaldoInsoluto)) AND ((@IsNull_CargaFinanciera = 1 AND [CargaFinanciera] IS NULL) OR ([CargaFinanciera] = @Original_CargaFinanciera)) AND ((@IsNull_SaldoInsolutoSEG = 1 AND [SaldoInsolutoSEG] IS NULL) OR ([SaldoInsolutoSEG] = @Original_SaldoInsolutoSEG)) AND ((@IsNull_CargaFinancieraSEG = 1 AND [CargaFinancieraSEG] IS NULL) OR ([CargaFinancieraSEG] = @Original_CargaFinancieraSEG)) AND ((@IsNull_SaldoInsolutoOTR = 1 AND [SaldoInsolutoOTR] IS NULL) OR ([SaldoInsolutoOTR] = @Original_SaldoInsolutoOTR)) AND ((@IsNull_CargaFinancieraOTR = 1 AND [CargaFinancieraOTR] IS NULL) OR ([CargaFinancieraOTR] = @Original_CargaFinancieraOTR)) AND ((@IsNull_InteresVencido = 1 AND [InteresVencido] IS NULL) OR ([InteresVencido] = @Original_InteresVencido)) AND ((@IsNull_CapitalVencido = 1 AND [CapitalVencido] IS NULL) OR ([CapitalVencido] = @Original_CapitalVencido)) AND ((@IsNull_InteresVencidoOt = 1 AND [InteresVencidoOt] IS NULL) OR ([InteresVencidoOt] = @Original_InteresVencidoOt)) AND ((@IsNull_CapitalVencidoOt = 1 AND [CapitalVencidoOt] IS NULL) OR ([CapitalVencidoOt] = @Original_CapitalVencidoOt)) AND ((@IsNull_IvaIntereses = 1 AND [IvaIntereses] IS NULL) OR ([IvaIntereses] = @Original_IvaIntereses)) AND ((@IsNull_IvaCapital = 1 AND [IvaCapital] IS NULL) OR ([IvaCapital] = @Original_IvaCapital)) AND ((@IsNull_Tipo = 1 AND [Tipo] IS NULL) OR ([Tipo] = @Original_Tipo)) AND ((@IsNull_Segmento_Negocio = 1 AND [Segmento_Negocio] IS NULL) OR ([Segmento_Negocio] = @Original_Segmento_Negocio)))</CommandText>
@@ -525,7 +525,7 @@ SELECT id_TraspasoVen, Anexo, Ciclo, Tipar, Fecha, SaldoInsoluto, CargaFinancier
               <Mapping SourceColumn="Segmento_Negocio" DataSetColumn="Segmento_Negocio" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAnexo" Modifier="Public" Name="DeleteAnexo" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteAnexo">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteAnexo" Modifier="Public" Name="DeleteAnexo" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteAnexo">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM CONT_TraspasosVencidos
@@ -540,7 +540,7 @@ WHERE        (Anexo = @Anexo)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EdoctavTableAdapter" GeneratorDataComponentClassName="EdoctavTableAdapter" Name="Edoctav" UserDataComponentName="EdoctavTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Edoctav" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Edoctav" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Anexo, SUM(Abcap) AS Capital, SUM(Inter) AS Interes, SUM(Iva) AS IvaInteres, SUM(IvaCapital) AS IvaCapital
@@ -562,7 +562,7 @@ GROUP BY Anexo</CommandText>
               <Mapping SourceColumn="IvaCapital" DataSetColumn="IvaCapital" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="FegaPagado" Modifier="Public" Name="FegaPagado" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FegaPagado">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="FegaPagado" Modifier="Public" Name="FegaPagado" QueryType="Scalar" ScalarCallRetval="System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FegaPagado">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT     ISNULL(SUM(Importe), 0) AS FegaPagado
@@ -575,7 +575,7 @@ WHERE     (Observa1 LIKE N'%FEGA%') AND (Anexo = @Anexo) AND (Letra = @Letra)</C
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Anexos" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="Plazo" Modifier="Public" Name="Plazo" QueryType="Scalar" ScalarCallRetval="System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="Plazo">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Anexos" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="Plazo" Modifier="Public" Name="Plazo" QueryType="Scalar" ScalarCallRetval="System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="Plazo">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Plazo
@@ -591,7 +591,7 @@ WHERE        (Anexo = @Anexo)</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EdoctasTableAdapter" GeneratorDataComponentClassName="EdoctasTableAdapter" Name="Edoctas" UserDataComponentName="EdoctasTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Edoctas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Edoctas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Anexo, SUM(Abcap) AS Capital, SUM(Inter) AS Interes, SUM(Iva) AS IvaInteres
@@ -615,7 +615,7 @@ GROUP BY Anexo</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EdoctaoTableAdapter" GeneratorDataComponentClassName="EdoctaoTableAdapter" Name="Edoctao" UserDataComponentName="EdoctaoTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Edoctao" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Edoctao" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Anexo, SUM(Abcap) AS Capital, SUM(Inter) AS Interes, SUM(Iva) AS IvaInteres
@@ -639,7 +639,7 @@ GROUP BY Anexo</CommandText>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="FacturasTableAdapter" GeneratorDataComponentClassName="FacturasTableAdapter" Name="Facturas" UserDataComponentName="FacturasTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Facturas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Facturas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [Facturas] WHERE (([Anexo] = @Original_Anexo) AND ((@IsNull_Letra = 1 AND [Letra] IS NULL) OR ([Letra] = @Original_Letra)) AND ([ImporteFac] = @Original_ImporteFac) AND ([SaldoFac] = @Original_SaldoFac) AND ([IntPr] = @Original_IntPr) AND ([VarPr] = @Original_VarPr) AND ([IntSe] = @Original_IntSe) AND ([VarSe] = @Original_VarSe) AND ([InteresOt] = @Original_InteresOt) AND ([VarOt] = @Original_VarOt) AND ([SeguroVida] = @Original_SeguroVida) AND ([ImporteFEGA] = @Original_ImporteFEGA) AND ([Factura] = @Original_Factura) AND ([RenPr] = @Original_RenPr) AND ([RenSe] = @Original_RenSe) AND ([CapitalOt] = @Original_CapitalOt) AND ([IvaCapital] = @Original_IvaCapital) AND ([IvaPr] = @Original_IvaPr) AND ([IvaSe] = @Original_IvaSe) AND ([IvaOt] = @Original_IvaOt) AND ([Bonifica] = @Original_Bonifica) AND ([Opcion] = @Original_Opcion) AND ([IvaOpcion] = @Original_IvaOpcion) AND ([TasaIVA] = @Original_TasaIVA))</CommandText>
@@ -804,7 +804,7 @@ SELECT Anexo, Letra, ImporteFac, SaldoFac, IntPr, VarPr, IntSe, VarSe, InteresOt
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SaldosAvioTableAdapter" GeneratorDataComponentClassName="SaldosAvioTableAdapter" Name="SaldosAvio" UserDataComponentName="SaldosAvioTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="server-raid.Production.dbo2" DbObjectName="Production.dbo.Vw_SaldosAvio" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="Production_Aux2CS (MySettings)" DbObjectName="Production.dbo.Vw_SaldosAvio" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT        Anexo, Tipar, Tipo, DiasAvio, Imp, Fega, Garantia, Intereses, Saldo
