@@ -179,6 +179,43 @@ Module Traspasos
                 End Select
             End If
         Next
+        ' POR REESTRUCTURAS
+        DS.TraspasosVencidos.Clear()
+        TaVenc.FillByREEST(DS.CarteraVencidaDET, FechaAPP)
+        For Each r As ProduccionDS.CarteraVencidaDETRow In DS.CarteraVencidaDET.Rows
+            Console.WriteLine("Cartera Vencida " & r.AnexoCon)
+            Vencido = False
+            Select Case r.TipoCredito.Trim
+                Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "FULL SERVICE", "ARRENDAMIENTO PURO"
+                    RR = DS.TraspasosVencidos.NewRow
+                    Select Case r.TipoCredito.Trim
+                        Case "ANTICIPO AVÍO", "CREDITO DE AVÍO"
+                            TraspasaAVCC(RR, r)
+                        Case "FULL SERVICE", "ARRENDAMIENTO PURO"
+                            TraspasaTRA(RR, r)
+                    End Select
+                    DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
+                Case "CUENTA CORRIENTE"
+                    RR = DS.TraspasosVencidos.NewRow
+                    TraspasaAVCC(RR, r)
+                    DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
+                Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE"
+                    RR = DS.TraspasosVencidos.NewRow
+                    TraspasaTRA(RR, r)
+                    DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
+            End Select
+            If Vencido = True Then
+                DS.TraspasosVencidos.GetChanges()
+                TaTrasp.Update(DS.TraspasosVencidos)
+                Select Case r.TipoCredito.Trim
+                    Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
+                        TaVenc.MarcaVencidaAV(r.Anexo)
+                    Case Else
+                        TaVenc.MarcaVencidaTRA(r.Anexo)
+                End Select
+            End If
+        Next
+
     End Sub
 
     Sub TraspasaTRA(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)
