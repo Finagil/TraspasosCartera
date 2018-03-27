@@ -219,7 +219,7 @@ Module Traspasos
     End Sub
 
     Sub TraspasaTRA(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)
-        TaTrasp.DeleteAnexo(r.Anexo)
+        TaTrasp.DeleteAnexo(r.Anexo, False)
         Dim EdoV As New ProduccionDSTableAdapters.EdoctavTableAdapter
         Dim EdoS As New ProduccionDSTableAdapters.EdoctasTableAdapter
         Dim EdoO As New ProduccionDSTableAdapters.EdoctaoTableAdapter
@@ -233,6 +233,7 @@ Module Traspasos
         RR.Fecha = FechaD
         RR.Tipar = r.Tipar
         RR.Segmento_Negocio = r.Segmento_Negocio
+        RR.Regreso = 0
 
         If DS.Edoctav.Rows.Count > 0 Then
             RR.SaldoInsoluto = DS.Edoctav.Rows(0).Item("Capital")
@@ -314,6 +315,7 @@ Module Traspasos
         RR.CapitalVencidoOt = 0
         RR.InteresVencidoOt = 0
         RR.IvaCapital = 0
+        RR.Regreso = 0
 
         Dim TaAV As New ProduccionDSTableAdapters.SaldosAvioTableAdapter
         TaAV.Fill(DS.SaldosAvio, r.Anexo)
