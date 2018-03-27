@@ -328,6 +328,4 @@ Module Traspasos
         Vencido = True
     End Sub
 
-
-
 End Module
