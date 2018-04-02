@@ -233,7 +233,7 @@ Module Traspasos
         RR.Fecha = FechaD
         RR.Tipar = r.Tipar
         RR.Segmento_Negocio = r.Segmento_Negocio
-        RR.Regreso = 0
+        RR.Regreso = r.Regreso
 
         If DS.Edoctav.Rows.Count > 0 Then
             RR.SaldoInsoluto = DS.Edoctav.Rows(0).Item("Capital")
@@ -315,7 +315,7 @@ Module Traspasos
         RR.CapitalVencidoOt = 0
         RR.InteresVencidoOt = 0
         RR.IvaCapital = 0
-        RR.Regreso = 0
+        RR.Regreso = r.Regreso
 
         Dim TaAV As New ProduccionDSTableAdapters.SaldosAvioTableAdapter
         TaAV.Fill(DS.SaldosAvio, r.Anexo)

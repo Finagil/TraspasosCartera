@@ -2185,6 +2185,8 @@ Partial Public Class ProduccionDS
         
         Private columnSegmento_Negocio As Global.System.Data.DataColumn
         
+        Private columnRegreso As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub New()
@@ -2373,6 +2375,14 @@ Partial Public Class ProduccionDS
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property RegresoColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRegreso
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2428,9 +2438,10 @@ Partial Public Class ProduccionDS
                     ByVal Tipo As String,  _
                     ByVal Anexo As String,  _
                     ByVal Tipar As String,  _
-                    ByVal Segmento_Negocio As String) As CarteraVencidaDETRow
+                    ByVal Segmento_Negocio As String,  _
+                    ByVal Regreso As Boolean) As CarteraVencidaDETRow
             Dim rowCarteraVencidaDETRow As CarteraVencidaDETRow = CType(Me.NewRow,CarteraVencidaDETRow)
-            Dim columnValuesArray() As Object = New Object() {AnexoCon, CicloPagare, TipoCredito, Cliente, Saldo, FechaVencimiento, Dias, Estatus, Orden, Capital, Fega, Interes, Garantia, SaldoInsoluto, EstatusContable, Tipo, Anexo, Tipar, Segmento_Negocio}
+            Dim columnValuesArray() As Object = New Object() {AnexoCon, CicloPagare, TipoCredito, Cliente, Saldo, FechaVencimiento, Dias, Estatus, Orden, Capital, Fega, Interes, Garantia, SaldoInsoluto, EstatusContable, Tipo, Anexo, Tipar, Segmento_Negocio, Regreso}
             rowCarteraVencidaDETRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCarteraVencidaDETRow)
             Return rowCarteraVencidaDETRow
@@ -2472,6 +2483,7 @@ Partial Public Class ProduccionDS
             Me.columnAnexo = MyBase.Columns("Anexo")
             Me.columnTipar = MyBase.Columns("Tipar")
             Me.columnSegmento_Negocio = MyBase.Columns("Segmento_Negocio")
+            Me.columnRegreso = MyBase.Columns("Regreso")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2515,6 +2527,8 @@ Partial Public Class ProduccionDS
             MyBase.Columns.Add(Me.columnTipar)
             Me.columnSegmento_Negocio = New Global.System.Data.DataColumn("Segmento_Negocio", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSegmento_Negocio)
+            Me.columnRegreso = New Global.System.Data.DataColumn("Regreso", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRegreso)
             Me.columnAnexoCon.ReadOnly = true
             Me.columnAnexoCon.MaxLength = 11
             Me.columnCicloPagare.ReadOnly = true
@@ -2544,6 +2558,7 @@ Partial Public Class ProduccionDS
             Me.columnTipar.MaxLength = 1
             Me.columnSegmento_Negocio.ReadOnly = true
             Me.columnSegmento_Negocio.MaxLength = 4
+            Me.columnRegreso.ReadOnly = true
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6275,6 +6290,21 @@ Partial Public Class ProduccionDS
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property Regreso() As Boolean
+            Get
+                Try 
+                    Return CType(Me(Me.tableCarteraVencidaDET.RegresoColumn),Boolean)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Regreso' de la tabla 'CarteraVencidaDET' es DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCarteraVencidaDET.RegresoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Function IsAnexoConNull() As Boolean
             Return Me.IsNull(Me.tableCarteraVencidaDET.AnexoConColumn)
         End Function
@@ -6499,6 +6529,18 @@ Partial Public Class ProduccionDS
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub SetSegmento_NegocioNull()
             Me(Me.tableCarteraVencidaDET.Segmento_NegocioColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsRegresoNull() As Boolean
+            Return Me.IsNull(Me.tableCarteraVencidaDET.RegresoColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetRegresoNull()
+            Me(Me.tableCarteraVencidaDET.RegresoColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -9929,6 +9971,7 @@ Namespace ProduccionDSTableAdapters
             tableMapping.ColumnMappings.Add("Anexo", "Anexo")
             tableMapping.ColumnMappings.Add("Tipar", "Tipar")
             tableMapping.ColumnMappings.Add("Segmento_Negocio", "Segmento_Negocio")
+            tableMapping.ColumnMappings.Add("Regreso", "Regreso")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
