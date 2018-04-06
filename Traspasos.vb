@@ -5,26 +5,29 @@ Module Traspasos
     Dim Tasa As Decimal
     Dim Contador As Integer = 0
     Dim AplicaGarantiaLIQ As String
-    Dim FechaS As String = Date.Now.ToString("yyyyMMdd")
-    Dim FechaD As DateTime = Date.Now.Date
+    Dim FechaS As String
+    Dim FechaD As DateTime
     Dim DS As New ProduccionDS
     Dim Vencido As Boolean = False
     Dim TaTrasp As New ProduccionDSTableAdapters.TraspasosVencidosTableAdapter
 
     Sub Main()
         Console.WriteLine("Iniciando ...")
-        Console.WriteLine("Cartera Vencida ...")
-        TraspasoCarteraVencida(FechaD)
-        'Fecha = "20150506" 'PARA PRUEBAS
-        Console.WriteLine("Procesando Avio Paso 1 ...")
-        Calcula_Saldos(FechaS, "H")
-        Console.WriteLine("Procesando Avio Paso 2 ...")
-        TraspasosAvio(FechaS, "H")
-        'Fecha = "20150506" 'PARA PRUEBAS
-        Console.WriteLine("Procesando CC Paso 1...")
-        Calcula_Saldos(FechaS, "C")
-        Console.WriteLine("Procesando CC Paso 2...")
-        TraspasosAvio(FechaS, "C")
+        FechaD = TaTrasp.FechaAplicacion
+        FechaD = FechaD.Date
+        FechaS = Today.Date
+        If Date.Now.Hour > 18 Then ' LOS TRAPASOS SE EJECUTAN POR LA TARDE
+            Console.WriteLine("Cartera Vencida ...")
+            'TraspasoCarteraVencida(FechaD)
+            Console.WriteLine("Procesando Avio Paso 1 ...")
+            Calcula_Saldos(FechaS, "H")
+            Console.WriteLine("Procesando Avio Paso 2 ...")
+            TraspasosAvio(FechaS, "H")
+            Console.WriteLine("Procesando CC Paso 1...")
+            Calcula_Saldos(FechaS, "C")
+            Console.WriteLine("Procesando CC Paso 2...")
+            TraspasosAvio(FechaS, "C")
+        End If
         Console.WriteLine("Terminado ...")
         EnviaError("ecacerest@lamoderna.com.mx", "Ejecucion de Traspasos " & FechaS & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
     End Sub
@@ -173,9 +176,11 @@ Module Traspasos
                 TaTrasp.Update(DS.TraspasosVencidos)
                 Select Case r.TipoCredito.Trim
                     Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
-                        TaVenc.MarcaVencidaAV(r.Anexo)
+                        TaVenc.MarcaVencidaAV("VENCIDA", r.Anexo)
                     Case Else
-                        TaVenc.MarcaVencidaTRA(r.Anexo)
+                        Dim BLOQ As Integer = DesBloqueaContrato(r.Anexo) 'DESBLOQUEO MESA DE CONTROL+++++++++++++
+                        TaVenc.MarcaVencidaTRA("VENCIDA", r.Anexo)
+                        BloqueaContrato(r.Anexo, BLOQ) '*******************BLOQUEO MESA DE CONTROL++++++++++++++++
                 End Select
             End If
         Next
@@ -209,9 +214,22 @@ Module Traspasos
                 TaTrasp.Update(DS.TraspasosVencidos)
                 Select Case r.TipoCredito.Trim
                     Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
-                        TaVenc.MarcaVencidaAV(r.Anexo)
+                        TaVenc.MarcaVencidaAV("VENCIDA", r.Anexo)
                     Case Else
-                        TaVenc.MarcaVencidaTRA(r.Anexo)
+                        Dim BLOQ As Integer = DesBloqueaContrato(r.Anexo) 'DESBLOQUEO MESA DE CONTROL+++++++++++++
+                        TaVenc.MarcaVencidaTRA("VENCIDA", r.Anexo)
+                        BloqueaContrato(r.Anexo, BLOQ) '*******************BLOQUEO MESA DE CONTROL++++++++++++++++
+                End Select
+            Else
+                DS.TraspasosVencidos.GetChanges()
+                TaTrasp.Update(DS.TraspasosVencidos)
+                Select Case r.TipoCredito.Trim
+                    Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
+                        TaVenc.MarcaVencidaAV("", r.Anexo)
+                    Case Else
+                        Dim BLOQ As Integer = DesBloqueaContrato(r.Anexo) 'DESBLOQUEO MESA DE CONTROL+++++++++++++
+                        TaVenc.MarcaVencidaTRA("", r.Anexo)
+                        BloqueaContrato(r.Anexo, BLOQ) '*******************BLOQUEO MESA DE CONTROL++++++++++++++++
                 End Select
             End If
         Next
@@ -219,7 +237,7 @@ Module Traspasos
     End Sub
 
     Sub TraspasaTRA(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)
-        TaTrasp.DeleteAnexo(r.Anexo, False)
+        TaTrasp.DeleteAnexo(r.Anexo, r.Regreso)
         Dim EdoV As New ProduccionDSTableAdapters.EdoctavTableAdapter
         Dim EdoS As New ProduccionDSTableAdapters.EdoctasTableAdapter
         Dim EdoO As New ProduccionDSTableAdapters.EdoctaoTableAdapter
@@ -294,7 +312,13 @@ Module Traspasos
             RR.InteresVencidoOt += InteresOt
             If IntereSEG > 0 Then RR.CargaFinancieraSEG += IntereSEG
         Next
-        Vencido = True
+        If RR.Regreso = False Then
+            Vencido = True
+        Else
+            Vencido = False
+        End If
+
+
     End Sub
 
     Sub TraspasaAVCC(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)

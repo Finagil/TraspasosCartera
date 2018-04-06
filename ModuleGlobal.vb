@@ -204,4 +204,21 @@
         Next
     End Sub
 
+    Public Sub BloqueaContrato(ByVal Anexo As String, Optional ByVal Registros As Integer = 1)
+        If Trim(Anexo) <> "" And Registros > 0 Then
+            Dim ta As New ProduccionDSTableAdapters.AnexosBloqueadosMCTableAdapter
+            ta.Insert(Anexo)
+            ta.Dispose()
+        End If
+    End Sub
+
+    Public Function DesBloqueaContrato(ByVal Anexo As String) As Integer
+        If Trim(Anexo) <> "" Then
+            Dim ta As New ProduccionDSTableAdapters.AnexosBloqueadosMCTableAdapter
+            DesBloqueaContrato = ta.Delete(Anexo)
+            ta.Dispose()
+        End If
+        Return DesBloqueaContrato
+    End Function
+
 End Module
