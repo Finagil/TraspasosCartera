@@ -15,18 +15,22 @@ Module Traspasos
         Console.WriteLine("Iniciando ...")
         FechaD = TaTrasp.FechaAplicacion
         FechaD = FechaD.Date
-        FechaS = Today.Date
         If Date.Now.Hour > 18 Then ' LOS TRAPASOS SE EJECUTAN POR LA TARDE
-            Console.WriteLine("Cartera Vencida ...")
-            'TraspasoCarteraVencida(FechaD)
-            Console.WriteLine("Procesando Avio Paso 1 ...")
-            Calcula_Saldos(FechaS, "H")
-            Console.WriteLine("Procesando Avio Paso 2 ...")
-            TraspasosAvio(FechaS, "H")
-            Console.WriteLine("Procesando CC Paso 1...")
-            Calcula_Saldos(FechaS, "C")
-            Console.WriteLine("Procesando CC Paso 2...")
-            TraspasosAvio(FechaS, "C")
+            If Date.Now.DayOfWeek = DayOfWeek.Sunday Or Date.Now.DayOfWeek = DayOfWeek.Saturday Then
+                ' no se generan traspasos
+            ElseIf Date.Now.DayOfWeek = DayOfWeek.Monday Then
+                ' el lunes se genneran traspasos de sabado y domingo
+                FechaS = Today.AddDays(-2).Date.ToString("yyyyMMdd") ' sabado
+                CorreTraspasos()
+                FechaS = Today.AddDays(-1).Date.ToString("yyyyMMdd") ' Domingo
+                CorreTraspasos()
+                FechaS = Today.Date.ToString("yyyyMMdd") ' Lunes
+                CorreTraspasos()
+            Else
+                FechaS = Today.Date.ToString("yyyyMMdd")
+                CorreTraspasos()
+            End If
+
         End If
         Console.WriteLine("Terminado ...")
         EnviaError("ecacerest@lamoderna.com.mx", "Ejecucion de Traspasos " & FechaS & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
@@ -352,6 +356,19 @@ Module Traspasos
             RR.InteresVencido += Interes
         Next
         Vencido = True
+    End Sub
+
+    Sub CorreTraspasos()
+        Console.WriteLine("Cartera Vencida ...")
+        'TraspasoCarteraVencida(FechaD)
+        Console.WriteLine("Procesando Avio Paso 1 ...")
+        Calcula_Saldos(FechaS, "H")
+        Console.WriteLine("Procesando Avio Paso 2 ...")
+        TraspasosAvio(FechaS, "H")
+        Console.WriteLine("Procesando CC Paso 1...")
+        Calcula_Saldos(FechaS, "C")
+        Console.WriteLine("Procesando CC Paso 2...")
+        TraspasosAvio(FechaS, "C")
     End Sub
 
 End Module
