@@ -57,8 +57,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=Server-Raid;Initial Catalog=Production_Aux2;Persist Security Info=Tru"& _ 
-            "e;User ID=User_PRO;Password=User_PRO2015")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SERVER-RAID;Initial Catalog=Production;Persist Security Info=True;Use"& _ 
+            "r ID=User_PRO;Password=User_PRO2015")>  _
         Public ReadOnly Property Production_Aux2CS() As String
             Get
                 Return CType(Me("Production_Aux2CS"),String)

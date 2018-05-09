@@ -10,27 +10,46 @@ Module Traspasos
     Dim DS As New ProduccionDS
     Dim Vencido As Boolean = False
     Dim TaTrasp As New ProduccionDSTableAdapters.TraspasosVencidosTableAdapter
+    Dim Arg() As String
 
     Sub Main()
+        Arg = Environment.GetCommandLineArgs()
         Console.WriteLine("Iniciando ...")
         FechaD = TaTrasp.FechaAplicacion
         FechaD = FechaD.Date
+        If Arg.Length > 1 Then
+            If Arg(1) = "V" Then
+                If FechaD.Now.DayOfWeek = DayOfWeek.Sunday Or FechaD.Now.DayOfWeek = DayOfWeek.Saturday Then
+                    ' no se generan traspasos
+                ElseIf FechaD.Now.DayOfWeek = DayOfWeek.Monday Then
+                    ' el lunes se genneran traspasos de sabado y domingo
+                    FechaD = FechaD.AddDays(-1) ' DOM
+                    CorreTraspasos(True)
+                    FechaD = FechaD.AddDays(-2) ' SAB
+                    CorreTraspasos(True)
+                    FechaD = FechaD.AddDays(-3) ' VIE
+                    CorreTraspasos(True)
+                Else
+                    CorreTraspasos(True)
+                End If
+            End If
+        End If
+
         If Date.Now.Hour > 18 Then ' LOS TRAPASOS SE EJECUTAN POR LA TARDE
             If Date.Now.DayOfWeek = DayOfWeek.Sunday Or Date.Now.DayOfWeek = DayOfWeek.Saturday Then
                 ' no se generan traspasos
             ElseIf Date.Now.DayOfWeek = DayOfWeek.Monday Then
                 ' el lunes se genneran traspasos de sabado y domingo
                 FechaS = Today.AddDays(-2).Date.ToString("yyyyMMdd") ' sabado
-                CorreTraspasos()
+                CorreTraspasos(False)
                 FechaS = Today.AddDays(-1).Date.ToString("yyyyMMdd") ' Domingo
-                CorreTraspasos()
+                CorreTraspasos(False)
                 FechaS = Today.Date.ToString("yyyyMMdd") ' Lunes
-                CorreTraspasos()
+                CorreTraspasos(False)
             Else
                 FechaS = Today.Date.ToString("yyyyMMdd")
-                CorreTraspasos()
+                CorreTraspasos(False)
             End If
-
         End If
         Console.WriteLine("Terminado ...")
         EnviaError("ecacerest@lamoderna.com.mx", "Ejecucion de Traspasos " & FechaS & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
@@ -39,7 +58,6 @@ Module Traspasos
     Sub TraspasosAvio(Fecha As String, Tipo As String)
         Try
             Dim InteresDias As Decimal = 0
-
             Dim TaS As New ProduccionDSTableAdapters.TraspasosAvioCCTableAdapter
             Dim ta As New ProduccionDSTableAdapters.SaldosAvioCCTableAdapter
             Dim T As New ProduccionDS.SaldosAvioCCDataTable
@@ -142,11 +160,11 @@ Module Traspasos
 
     Sub TraspasoCarteraVencida(Fecha As DateTime)
         Dim TaVenc As New ProduccionDSTableAdapters.CarteraVencidaDETTableAdapter
-        Dim FechaAPP As DateTime = TaVenc.FechaAplicacion
+        'Dim FechaAPP As DateTime = TaVenc.FechaAplicacion
         Dim RR As ProduccionDS.TraspasosVencidosRow
 
-        FechaAPP = FechaAPP.AddDays(-1)
-        TaVenc.Fill(DS.CarteraVencidaDET, FechaAPP)
+        'FechaAPP = FechaAPP.AddDays(-1)
+        TaVenc.Fill(DS.CarteraVencidaDET, Fecha)
         For Each r As ProduccionDS.CarteraVencidaDETRow In DS.CarteraVencidaDET.Rows
             Console.WriteLine("Cartera Vencida " & r.AnexoCon)
             Vencido = False
@@ -190,7 +208,7 @@ Module Traspasos
         Next
         ' POR REESTRUCTURAS
         DS.TraspasosVencidos.Clear()
-        TaVenc.FillByREEST(DS.CarteraVencidaDET, FechaAPP)
+        TaVenc.FillByREEST(DS.CarteraVencidaDET, Fecha)
         For Each r As ProduccionDS.CarteraVencidaDETRow In DS.CarteraVencidaDET.Rows
             Console.WriteLine("Cartera Vencida " & r.AnexoCon)
             Vencido = False
@@ -358,17 +376,20 @@ Module Traspasos
         Vencido = True
     End Sub
 
-    Sub CorreTraspasos()
-        Console.WriteLine("Cartera Vencida ...")
-        'TraspasoCarteraVencida(FechaD)
-        Console.WriteLine("Procesando Avio Paso 1 ...")
-        Calcula_Saldos(FechaS, "H")
-        Console.WriteLine("Procesando Avio Paso 2 ...")
-        TraspasosAvio(FechaS, "H")
-        Console.WriteLine("Procesando CC Paso 1...")
-        Calcula_Saldos(FechaS, "C")
-        Console.WriteLine("Procesando CC Paso 2...")
-        TraspasosAvio(FechaS, "C")
+    Sub CorreTraspasos(Vencida As Boolean)
+        If Vencida = True Then
+            Console.WriteLine("Cartera Vencida ...")
+            TraspasoCarteraVencida(FechaD)
+        Else
+            Console.WriteLine("Procesando Avio Paso 1 ...")
+            Calcula_Saldos(FechaS, "H")
+            Console.WriteLine("Procesando Avio Paso 2 ...")
+            TraspasosAvio(FechaS, "H")
+            Console.WriteLine("Procesando CC Paso 1...")
+            Calcula_Saldos(FechaS, "C")
+            Console.WriteLine("Procesando CC Paso 2...")
+            TraspasosAvio(FechaS, "C")
+        End If
     End Sub
 
 End Module
