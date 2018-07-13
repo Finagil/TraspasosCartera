@@ -19,19 +19,7 @@ Module Traspasos
         FechaD = FechaD.Date
         If Arg.Length > 1 Then
             If Arg(1) = "V" Then
-                If FechaD.Now.DayOfWeek = DayOfWeek.Sunday Or FechaD.Now.DayOfWeek = DayOfWeek.Saturday Then
-                    ' no se generan traspasos
-                ElseIf FechaD.Now.DayOfWeek = DayOfWeek.Monday Then
-                    ' el lunes se genneran traspasos de sabado y domingo
-                    FechaD = FechaD.AddDays(-1) ' DOM
-                    CorreTraspasos(True)
-                    FechaD = FechaD.AddDays(-2) ' SAB
-                    CorreTraspasos(True)
-                    FechaD = FechaD.AddDays(-3) ' VIE
-                    CorreTraspasos(True)
-                Else
-                    CorreTraspasos(True)
-                End If
+                CorreTraspasos(True)
             End If
         End If
 
@@ -174,22 +162,22 @@ Module Traspasos
                         RR = DS.TraspasosVencidos.NewRow
                         Select Case r.TipoCredito.Trim
                             Case "ANTICIPO AVÍO", "CREDITO DE AVÍO"
-                                TraspasaAVCC(RR, r)
+                                TraspasaAVCC(RR, r, 30 - r.Dias)
                             Case "FULL SERVICE", "ARRENDAMIENTO PURO"
-                                TraspasaTRA(RR, r)
+                                TraspasaTRA(RR, r, 30 - r.Dias)
                         End Select
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
                 Case "CUENTA CORRIENTE"
                     If r.Dias >= 60 Then
                         RR = DS.TraspasosVencidos.NewRow
-                        TraspasaAVCC(RR, r)
+                        TraspasaAVCC(RR, r, 60 - r.Dias)
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
                 Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE"
                     If r.Dias >= 90 Then
                         RR = DS.TraspasosVencidos.NewRow
-                        TraspasaTRA(RR, r)
+                        TraspasaTRA(RR, r, 90 - r.Dias)
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
             End Select
@@ -217,18 +205,18 @@ Module Traspasos
                     RR = DS.TraspasosVencidos.NewRow
                     Select Case r.TipoCredito.Trim
                         Case "ANTICIPO AVÍO", "CREDITO DE AVÍO"
-                            TraspasaAVCC(RR, r)
+                            TraspasaAVCC(RR, r, 0)
                         Case "FULL SERVICE", "ARRENDAMIENTO PURO"
-                            TraspasaTRA(RR, r)
+                            TraspasaTRA(RR, r, 0)
                     End Select
                     DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                 Case "CUENTA CORRIENTE"
                     RR = DS.TraspasosVencidos.NewRow
-                    TraspasaAVCC(RR, r)
+                    TraspasaAVCC(RR, r, 0)
                     DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                 Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE"
                     RR = DS.TraspasosVencidos.NewRow
-                    TraspasaTRA(RR, r)
+                    TraspasaTRA(RR, r, 0)
                     DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
             End Select
             If Vencido = True Then
@@ -258,7 +246,7 @@ Module Traspasos
 
     End Sub
 
-    Sub TraspasaTRA(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)
+    Sub TraspasaTRA(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow, dias As Integer)
         TaTrasp.DeleteAnexo(r.Anexo, r.Regreso)
         Dim EdoV As New ProduccionDSTableAdapters.EdoctavTableAdapter
         Dim EdoS As New ProduccionDSTableAdapters.EdoctasTableAdapter
@@ -270,7 +258,7 @@ Module Traspasos
         RR.Anexo = r.Anexo
         RR.Ciclo = ""
         RR.Tipo = r.Tipo
-        RR.Fecha = FechaD
+        RR.Fecha = FechaD.AddDays(dias)
         RR.Tipar = r.Tipar
         RR.Segmento_Negocio = r.Segmento_Negocio
         RR.Regreso = r.Regreso
@@ -343,11 +331,11 @@ Module Traspasos
 
     End Sub
 
-    Sub TraspasaAVCC(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow)
+    Sub TraspasaAVCC(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow, dias As Integer)
         RR.Anexo = r.Anexo
         RR.Ciclo = ""
         RR.Tipo = r.Tipo
-        RR.Fecha = FechaD
+        RR.Fecha = FechaD.AddDays(dias)
         RR.Tipar = r.Tipar
         RR.Segmento_Negocio = r.Segmento_Negocio
         RR.SaldoInsolutoOTR = 0
