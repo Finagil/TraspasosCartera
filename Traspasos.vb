@@ -333,7 +333,7 @@ Module Traspasos
 
     Sub TraspasaAVCC(ByRef RR As ProduccionDS.TraspasosVencidosRow, ByRef r As ProduccionDS.CarteraVencidaDETRow, dias As Integer)
         RR.Anexo = r.Anexo
-        RR.Ciclo = ""
+        RR.Ciclo = r.Ciclo
         RR.Tipo = r.Tipo
         RR.Fecha = FechaD.AddDays(dias)
         RR.Tipar = r.Tipar
@@ -352,7 +352,7 @@ Module Traspasos
         RR.Regreso = r.Regreso
 
         Dim TaAV As New ProduccionDSTableAdapters.SaldosAvioTableAdapter
-        TaAV.Fill(DS.SaldosAvio, r.Anexo)
+        TaAV.Fill(DS.SaldosAvio, r.Anexo, r.Ciclo)
         Dim Capital, Interes As Decimal
 
         For Each w As ProduccionDS.SaldosAvioRow In DS.SaldosAvio.Rows

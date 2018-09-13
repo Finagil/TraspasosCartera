@@ -2222,6 +2222,8 @@ Partial Public Class ProduccionDS
         
         Private columnRegreso As Global.System.Data.DataColumn
         
+        Private columnCiclo As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub New()
@@ -2418,6 +2420,14 @@ Partial Public Class ProduccionDS
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property CicloColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCiclo
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -2474,9 +2484,10 @@ Partial Public Class ProduccionDS
                     ByVal Anexo As String,  _
                     ByVal Tipar As String,  _
                     ByVal Segmento_Negocio As String,  _
-                    ByVal Regreso As Boolean) As CarteraVencidaDETRow
+                    ByVal Regreso As Integer,  _
+                    ByVal Ciclo As String) As CarteraVencidaDETRow
             Dim rowCarteraVencidaDETRow As CarteraVencidaDETRow = CType(Me.NewRow,CarteraVencidaDETRow)
-            Dim columnValuesArray() As Object = New Object() {AnexoCon, CicloPagare, TipoCredito, Cliente, Saldo, FechaVencimiento, Dias, Estatus, Orden, Capital, Fega, Interes, Garantia, SaldoInsoluto, EstatusContable, Tipo, Anexo, Tipar, Segmento_Negocio, Regreso}
+            Dim columnValuesArray() As Object = New Object() {AnexoCon, CicloPagare, TipoCredito, Cliente, Saldo, FechaVencimiento, Dias, Estatus, Orden, Capital, Fega, Interes, Garantia, SaldoInsoluto, EstatusContable, Tipo, Anexo, Tipar, Segmento_Negocio, Regreso, Ciclo}
             rowCarteraVencidaDETRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCarteraVencidaDETRow)
             Return rowCarteraVencidaDETRow
@@ -2519,6 +2530,7 @@ Partial Public Class ProduccionDS
             Me.columnTipar = MyBase.Columns("Tipar")
             Me.columnSegmento_Negocio = MyBase.Columns("Segmento_Negocio")
             Me.columnRegreso = MyBase.Columns("Regreso")
+            Me.columnCiclo = MyBase.Columns("Ciclo")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2562,8 +2574,10 @@ Partial Public Class ProduccionDS
             MyBase.Columns.Add(Me.columnTipar)
             Me.columnSegmento_Negocio = New Global.System.Data.DataColumn("Segmento_Negocio", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSegmento_Negocio)
-            Me.columnRegreso = New Global.System.Data.DataColumn("Regreso", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnRegreso = New Global.System.Data.DataColumn("Regreso", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRegreso)
+            Me.columnCiclo = New Global.System.Data.DataColumn("Ciclo", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCiclo)
             Me.columnAnexoCon.ReadOnly = true
             Me.columnAnexoCon.MaxLength = 11
             Me.columnCicloPagare.ReadOnly = true
@@ -2594,6 +2608,8 @@ Partial Public Class ProduccionDS
             Me.columnSegmento_Negocio.ReadOnly = true
             Me.columnSegmento_Negocio.MaxLength = 4
             Me.columnRegreso.ReadOnly = true
+            Me.columnCiclo.ReadOnly = true
+            Me.columnCiclo.MaxLength = 2
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6601,16 +6617,31 @@ Partial Public Class ProduccionDS
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property Regreso() As Boolean
+        Public Property Regreso() As Integer
             Get
                 Try 
-                    Return CType(Me(Me.tableCarteraVencidaDET.RegresoColumn),Boolean)
+                    Return CType(Me(Me.tableCarteraVencidaDET.RegresoColumn),Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Regreso' de la tabla 'CarteraVencidaDET' es DBNull.", e)
                 End Try
             End Get
             Set
                 Me(Me.tableCarteraVencidaDET.RegresoColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property Ciclo() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCarteraVencidaDET.CicloColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Ciclo' de la tabla 'CarteraVencidaDET' es DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCarteraVencidaDET.CicloColumn) = value
             End Set
         End Property
         
@@ -6852,6 +6883,18 @@ Partial Public Class ProduccionDS
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub SetRegresoNull()
             Me(Me.tableCarteraVencidaDET.RegresoColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsCicloNull() As Boolean
+            Return Me.IsNull(Me.tableCarteraVencidaDET.CicloColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetCicloNull()
+            Me(Me.tableCarteraVencidaDET.CicloColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -10357,6 +10400,7 @@ Namespace ProduccionDSTableAdapters
             tableMapping.ColumnMappings.Add("Tipar", "Tipar")
             tableMapping.ColumnMappings.Add("Segmento_Negocio", "Segmento_Negocio")
             tableMapping.ColumnMappings.Add("Regreso", "Regreso")
+            tableMapping.ColumnMappings.Add("Ciclo", "Ciclo")
             Me._adapter.TableMappings.Add(tableMapping)
         End Sub
         
@@ -10404,7 +10448,7 @@ Namespace ProduccionDSTableAdapters
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anexo", Global.System.Data.SqlDbType.NChar, 9, Global.System.Data.ParameterDirection.Input, 0, 0, "Anexo", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT        Mensu"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Anexos"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Anexo = @Anexo)"
+            Me._commandCollection(5).CommandText = "SELECT Mensu FROM Anexos WHERE (Anexo = @Anexo)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anexo", Global.System.Data.SqlDbType.NChar, 9, Global.System.Data.ParameterDirection.Input, 0, 0, "Anexo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
@@ -10515,7 +10559,7 @@ Namespace ProduccionDSTableAdapters
                 command.Parameters(0).Value = CType(EstatusContable,String)
             End If
             If (Anexo Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Anexo")
+                command.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 command.Parameters(1).Value = CType(Anexo,String)
             End If
@@ -10547,7 +10591,7 @@ Namespace ProduccionDSTableAdapters
                 command.Parameters(0).Value = CType(EstatusContable,String)
             End If
             If (Anexo Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Anexo")
+                command.Parameters(1).Value = Global.System.DBNull.Value
             Else
                 command.Parameters(1).Value = CType(Anexo,String)
             End If
@@ -13275,21 +13319,28 @@ Namespace ProduccionDSTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT        Anexo, Tipar, Tipo, DiasAvio, Imp, Fega, Garantia, Intereses, Saldo"& _ 
-                ", Ciclo"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Vw_SaldosAvio"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Anexo = @Anexo)"
+                ", Ciclo"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Vw_SaldosAvio"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Anexo = @Anexo) AND (Ciclo"& _ 
+                " = @Ciclo)"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Anexo", Global.System.Data.SqlDbType.NChar, 9, Global.System.Data.ParameterDirection.Input, 0, 0, "Anexo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Ciclo", Global.System.Data.SqlDbType.NChar, 2, Global.System.Data.ParameterDirection.Input, 0, 0, "Ciclo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
-        Public Overloads Overridable Function Fill(ByVal dataTable As ProduccionDS.SaldosAvioDataTable, ByVal Anexo As String) As Integer
+        Public Overloads Overridable Function Fill(ByVal dataTable As ProduccionDS.SaldosAvioDataTable, ByVal Anexo As String, ByVal Ciclo As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             If (Anexo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Anexo")
             Else
                 Me.Adapter.SelectCommand.Parameters(0).Value = CType(Anexo,String)
+            End If
+            If (Ciclo Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Ciclo")
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(Ciclo,String)
             End If
             If (Me.ClearBeforeFill = true) Then
                 dataTable.Clear
@@ -13302,12 +13353,17 @@ Namespace ProduccionDSTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
-        Public Overloads Overridable Function GetData(ByVal Anexo As String) As ProduccionDS.SaldosAvioDataTable
+        Public Overloads Overridable Function GetData(ByVal Anexo As String, ByVal Ciclo As String) As ProduccionDS.SaldosAvioDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             If (Anexo Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Anexo")
             Else
                 Me.Adapter.SelectCommand.Parameters(0).Value = CType(Anexo,String)
+            End If
+            If (Ciclo Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Ciclo")
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(Ciclo,String)
             End If
             Dim dataTable As ProduccionDS.SaldosAvioDataTable = New ProduccionDS.SaldosAvioDataTable()
             Me.Adapter.Fill(dataTable)
