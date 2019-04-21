@@ -186,7 +186,7 @@ Module Traspasos
                 TaTrasp.Update(DS.TraspasosVencidos)
                 Select Case r.TipoCredito.Trim
                     Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
-                        TaVenc.MarcaVencidaAV("VENCIDA", r.Anexo)
+                        TaVenc.MarcaVencidaAV("VENCIDA", r.Anexo, r.Ciclo)
                     Case Else
                         Dim BLOQ As Integer = DesBloqueaContrato(r.Anexo) 'DESBLOQUEO MESA DE CONTROL+++++++++++++
                         TaVenc.MarcaVencidaTRA("VENCIDA", r.Anexo)
@@ -224,7 +224,7 @@ Module Traspasos
                 TaTrasp.Update(DS.TraspasosVencidos)
                 Select Case r.TipoCredito.Trim
                     Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
-                        TaVenc.MarcaVencidaAV("VENCIDA", r.Anexo)
+                        TaVenc.MarcaVencidaAV("VENCIDA", r.Anexo, r.Ciclo)
                     Case Else
                         Dim BLOQ As Integer = DesBloqueaContrato(r.Anexo) 'DESBLOQUEO MESA DE CONTROL+++++++++++++
                         TaVenc.MarcaVencidaTRA("VENCIDA", r.Anexo)
@@ -235,7 +235,7 @@ Module Traspasos
                 TaTrasp.Update(DS.TraspasosVencidos)
                 Select Case r.TipoCredito.Trim
                     Case "ANTICIPO AVÍO", "CREDITO DE AVÍO", "CUENTA CORRIENTE"
-                        TaVenc.MarcaVencidaAV("", r.Anexo)
+                        TaVenc.MarcaVencidaAV("", r.Anexo, r.Ciclo)
                     Case Else
                         Dim BLOQ As Integer = DesBloqueaContrato(r.Anexo) 'DESBLOQUEO MESA DE CONTROL+++++++++++++
                         TaVenc.MarcaVencidaTRA("", r.Anexo)
