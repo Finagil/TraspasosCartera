@@ -73,8 +73,9 @@ Module Traspasos
     Private Sub EnviaError(ByVal Para As String, ByVal Mensaje As String, ByVal Asunto As String)
         If InStr(Mensaje, Asunto) = 0 Then
             Dim Mensage As New MailMessage("TraspasosAvio@cmoderna.com", Trim(Para), Trim(Asunto), Mensaje)
-            Dim Cliente As New SmtpClient("smtp01.cmoderna.com", 26)
+            Dim Cliente As New SmtpClient("smtp01.cmoderna.com", 25)
             Try
+                Cliente.Credentials = New System.Net.NetworkCredential("ecacerest", "c4c3r1t0s", "cmoderna")
                 Cliente.Send(Mensage)
             Catch ex As Exception
                 'ReportError(ex)
