@@ -19,5 +19,8 @@
     <Setting Name="SMTP_creden" Type="System.String" Scope="User">
       <Value Profile="(Default)">ecacerest,c4c3r1t0s,cmoderna</Value>
     </Setting>
+    <Setting Name="RutaExecutables" Type="System.String" Scope="User">
+      <Value Profile="(Default)">E:\Contratos$\Executables\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

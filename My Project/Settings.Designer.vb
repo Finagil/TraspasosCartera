@@ -100,6 +100,18 @@ Namespace My
                 Me("SMTP_creden") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("E:\Contratos$\Executables\")>  _
+        Public Property RutaExecutables() As String
+            Get
+                Return CType(Me("RutaExecutables"),String)
+            End Get
+            Set
+                Me("RutaExecutables") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

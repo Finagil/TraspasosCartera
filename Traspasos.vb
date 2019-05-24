@@ -66,7 +66,7 @@ Module Traspasos
                 TaS.Insert(r.Anexo, r.Ciclo, r.Imp + r.Fega + r.Intereses + InteresDias, r.Imp, r.Intereses, r.Garantia, r.Tipar, r.Fega, Fecha, InteresDias)
             Next
         Catch ex As Exception
-            EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos", ex.Message)
+            EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos1", ex.Message)
         End Try
     End Sub
 
@@ -124,6 +124,7 @@ Module Traspasos
     End Function
 
     Sub Calcula_Saldos(Fecha As String, Tipo As String)
+        Dim Cad As String
         Try
             Dim ta As New ProduccionDSTableAdapters.SaldosAvioCCTableAdapter
             Dim T As New ProduccionDS.SaldosAvioCCDataTable
@@ -135,15 +136,18 @@ Module Traspasos
                 ta.FillCC(T, Fecha)
             End If
             For Each r In T.Rows
+                Console.WriteLine(My.Settings.RutaExecutables)
                 Console.WriteLine(r.AnexoCon & " - " & r.CicloPagare)
-                If Directory.Exists("D:\Contratos$\") Then
-                    Shell("""D:\Contratos$\Executables\\EstadoCuentaAVCC.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0", AppWinStyle.NormalFocus, True)
+                If Directory.Exists(My.Settings.RutaExecutables) Then
+                    Console.WriteLine("""" & My.Settings.RutaExecutables & "EstadoCuentaAVCC.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0")
+                    Shell("""" & My.Settings.RutaExecutables & "EstadoCuentaAVCC.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0", AppWinStyle.NormalFocus, True)
                 Else
+                    Console.WriteLine("""F:\Executables\EstadoCuentaAVCC.exe"" ")
                     Shell("""F:\Executables\EstadoCuentaAVCC.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0", AppWinStyle.NormalFocus, True)
                 End If
             Next
         Catch ex As Exception
-            EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos", ex.Message)
+            EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos2", ex.Message & cad)
         End Try
 
     End Sub
