@@ -180,7 +180,7 @@ Module Traspasos
                         TraspasaAVCC(RR, r, 60 - r.Dias)
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
-                Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE"
+                Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE", "CREDITO LIQUIDEZ INMEDIATA"
                     If r.Dias >= 90 Then
                         RR = DS.TraspasosVencidos.NewRow
                         TraspasaTRA(RR, r, 90 - r.Dias)
@@ -220,7 +220,7 @@ Module Traspasos
                     RR = DS.TraspasosVencidos.NewRow
                     TraspasaAVCC(RR, r, 0)
                     DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
-                Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE"
+                Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE", "CREDITO LIQUIDEZ INMEDIATA"
                     RR = DS.TraspasosVencidos.NewRow
                     TraspasaTRA(RR, r, 0)
                     DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
