@@ -8,7 +8,7 @@ Module Traspasos
     Dim FechaS As String
     Dim FechaD As DateTime
     Dim DS As New ProduccionDS
-    Dim Vencido As Boolean = False
+    Dim Vencido As Boolean
     Dim TaTrasp As New ProduccionDSTableAdapters.TraspasosVencidosTableAdapter
     Dim Arg() As String
 
@@ -155,6 +155,7 @@ Module Traspasos
     Sub TraspasoCarteraVencida(Fecha As DateTime)
         Dim TaVenc As New ProduccionDSTableAdapters.CarteraVencidaDETTableAdapter
         'Dim FechaAPP As DateTime = TaVenc.FechaAplicacion
+        Dim Diass As Integer
         Dim RR As ProduccionDS.TraspasosVencidosRow
 
         'FechaAPP = FechaAPP.AddDays(-1)
@@ -181,7 +182,19 @@ Module Traspasos
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
                 Case "ARRENDAMIENTO FINANCIERO", "CREDITO REFACCIONARIO", "CREDITO SIMPLE", "CREDITO LIQUIDEZ INMEDIATA"
-                    If r.Dias >= 90 Then
+                    If TaVenc.EsPagoUnicoInteresMensual(r.Anexo) = 1 Then
+                        Diass = TaVenc.DiasCapital(Fecha, r.Anexo)
+                        If Diass < 30 Then
+                            Diass = 90
+                        Else
+                            r.Dias = Diass
+                            Diass = 30
+                        End If
+                    Else
+                        Diass = 90
+                    End If
+
+                    If r.Dias >= Diass Then
                         RR = DS.TraspasosVencidos.NewRow
                         TraspasaTRA(RR, r, 90 - r.Dias)
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
