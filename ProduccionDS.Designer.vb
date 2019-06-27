@@ -2602,7 +2602,6 @@ Partial Public Class ProduccionDS
             Me.columnCliente.MaxLength = 120
             Me.columnSaldo.ReadOnly = true
             Me.columnFechaVencimiento.ReadOnly = true
-            Me.columnDias.ReadOnly = true
             Me.columnEstatus.ReadOnly = true
             Me.columnEstatus.MaxLength = 1
             Me.columnOrden.ReadOnly = true
