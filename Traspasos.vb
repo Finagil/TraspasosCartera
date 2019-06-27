@@ -196,7 +196,7 @@ Module Traspasos
 
                     If r.Dias >= Diass Then
                         RR = DS.TraspasosVencidos.NewRow
-                        TraspasaTRA(RR, r, 90 - r.Dias)
+                        TraspasaTRA(RR, r, Diass - r.Dias)
                         DS.TraspasosVencidos.AddTraspasosVencidosRow(RR)
                     End If
             End Select
