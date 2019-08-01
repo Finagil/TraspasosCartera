@@ -17,6 +17,7 @@ Module Traspasos
         Console.WriteLine("Iniciando ...")
         FechaD = TaTrasp.FechaAplicacion
         FechaD = FechaD.Date
+        Console.WriteLine(FechaD.Date.ToShortDateString)
         If Arg.Length > 1 Then
             If Arg(1) = "V" Then
                 CorreTraspasos(True)
@@ -26,16 +27,16 @@ Module Traspasos
         If Date.Now.Hour > 18 Then ' LOS TRAPASOS SE EJECUTAN POR LA TARDE
             If Date.Now.DayOfWeek = DayOfWeek.Sunday Or Date.Now.DayOfWeek = DayOfWeek.Saturday Then
                 ' no se generan traspasos
-            ElseIf Date.Now.DayOfWeek = DayOfWeek.Monday Then
+            ElseIf FechaD.DayOfWeek = DayOfWeek.Monday Then
                 ' el lunes se genneran traspasos de sabado y domingo
-                FechaS = Today.AddDays(-2).Date.ToString("yyyyMMdd") ' sabado
+                FechaS = FechaD.AddDays(-2).Date.ToString("yyyyMMdd") ' sabado
                 CorreTraspasos(False)
-                FechaS = Today.AddDays(-1).Date.ToString("yyyyMMdd") ' Domingo
+                FechaS = FechaD.AddDays(-1).Date.ToString("yyyyMMdd") ' Domingo
                 CorreTraspasos(False)
-                FechaS = Today.Date.ToString("yyyyMMdd") ' Lunes
+                FechaS = FechaD.Date.ToString("yyyyMMdd") ' Lunes
                 CorreTraspasos(False)
             Else
-                FechaS = Today.Date.ToString("yyyyMMdd")
+                FechaS = FechaD.Date.ToString("yyyyMMdd")
                 CorreTraspasos(False)
             End If
         End If
