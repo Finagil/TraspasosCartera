@@ -1008,7 +1008,9 @@ Partial Public Class ProduccionDS
             MyBase.Columns.Add(Me.columnDescr)
             Me.columnTipar = New Global.System.Data.DataColumn("Tipar", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTipar)
+            Me.columnAnexo.AllowDBNull = false
             Me.columnAnexo.MaxLength = 9
+            Me.columnCiclo.AllowDBNull = false
             Me.columnCiclo.MaxLength = 2
             Me.columnCliente.MaxLength = 5
             Me.columnAnexoCon.MaxLength = 11
@@ -5462,11 +5464,7 @@ Partial Public Class ProduccionDS
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property Anexo() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableSaldosAvioCC.AnexoColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Anexo' de la tabla 'SaldosAvioCC' es DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableSaldosAvioCC.AnexoColumn),String)
             End Get
             Set
                 Me(Me.tableSaldosAvioCC.AnexoColumn) = value
@@ -5477,11 +5475,7 @@ Partial Public Class ProduccionDS
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property Ciclo() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableSaldosAvioCC.CicloColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("El valor de la columna 'Ciclo' de la tabla 'SaldosAvioCC' es DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableSaldosAvioCC.CicloColumn),String)
             End Get
             Set
                 Me(Me.tableSaldosAvioCC.CicloColumn) = value
@@ -5688,30 +5682,6 @@ Partial Public Class ProduccionDS
                 Me(Me.tableSaldosAvioCC.TiparColumn) = value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function IsAnexoNull() As Boolean
-            Return Me.IsNull(Me.tableSaldosAvioCC.AnexoColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub SetAnexoNull()
-            Me(Me.tableSaldosAvioCC.AnexoColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function IsCicloNull() As Boolean
-            Return Me.IsNull(Me.tableSaldosAvioCC.CicloColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub SetCicloNull()
-            Me(Me.tableSaldosAvioCC.CicloColumn) = Global.System.Convert.DBNull
-        End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -9016,17 +8986,17 @@ Namespace ProduccionDSTableAdapters
             Me._commandCollection(0).CommandText = "SELECT        Anexo, Ciclo, Cliente, Imp, Fega, Garantia, Intereses, Saldo, Anexo"& _ 
                 "Con, Tipta, Tasas, DiferencialFINAGIL, CicloPagare, FechaFinal, FechaTerminacion"& _ 
                 ", Descr, Tipar"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Vw_CONT_SaldosAvioCC"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (FechaTermina"& _ 
-                "cion >= FechaFinal) AND (FechaTerminacion = @Fecha) AND (Tipar = N'A' OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"      "& _ 
-                "                   Tipar = N'H')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY FechaTerminacion, Anexo, Ciclo"
+                "cion = @Fecha) AND (Tipar = N'A' OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                         Tipar = N'H')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORD"& _ 
+                "ER BY FechaTerminacion, Anexo, Ciclo"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(0).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Fecha", Global.System.Data.SqlDbType.NChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "FechaTerminacion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
-            Me._commandCollection(1).CommandText = "SELECT        Anexo, AnexoCon, Ciclo, CicloPagare, Cliente, Descr, DiferencialFIN"& _ 
-                "AGIL, FechaFinal, FechaTerminacion, Fega, Garantia, Imp, Intereses, Saldo, Tasas"& _ 
-                ", Tipar, Tipta"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            Vw_CONT_SaldosAvioCC"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (FechaTermina"& _ 
-                "cion >= FechaFinal) AND (FechaTerminacion = @Fecha) AND (Tipar = N'C')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"ORDER BY"& _ 
-                " FechaTerminacion, Anexo, AnexoCon"
+            Me._commandCollection(1).CommandText = "SELECT Anexo, AnexoCon, Ciclo, CicloPagare, Cliente, Descr, DiferencialFINAGIL, F"& _ 
+                "echaFinal, FechaTerminacion, Fega, Garantia, Imp, Intereses, Saldo, Tasas, Tipar"& _ 
+                ", Tipta FROM Vw_CONT_SaldosAvioCC WHERE (FechaTerminacion >= FechaFinal) AND (Fe"& _ 
+                "chaTerminacion = @Fecha) AND (Tipar = N'C') ORDER BY FechaTerminacion, Anexo, An"& _ 
+                "exoCon"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Fecha", Global.System.Data.SqlDbType.NChar, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "FechaTerminacion", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
