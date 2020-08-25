@@ -103,7 +103,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("V:\Contratos$\Executables\")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("V:\Contratos$\Executables\test\")>  _
         Public Property RutaExecutables() As String
             Get
                 Return CType(Me("RutaExecutables"),String)

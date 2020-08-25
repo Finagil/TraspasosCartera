@@ -20,7 +20,7 @@
       <Value Profile="(Default)">ecacerest,h3Pd1BsQ,cmoderna</Value>
     </Setting>
     <Setting Name="RutaExecutables" Type="System.String" Scope="User">
-      <Value Profile="(Default)">V:\Contratos$\Executables\</Value>
+      <Value Profile="(Default)">V:\Contratos$\Executables\test\</Value>
     </Setting>
   </Settings>
 </SettingsFile>
