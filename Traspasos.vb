@@ -65,6 +65,7 @@ Module Traspasos
                 FijaTasa(r.Anexo, r.Ciclo, CadenaFecha(Fecha))
                 InteresDias = CalculaInteres(r)
                 TaS.Insert(r.Anexo, r.Ciclo, r.Imp + r.Fega + r.Intereses + InteresDias, r.Imp, r.Intereses, r.Garantia, r.Tipar, r.Fega, Fecha, InteresDias)
+                TaS.FacturaInteresesIAV(r.Anexo, r.Ciclo) 'falta ver donde facturarmos interes y capital traspasado
             Next
         Catch ex As Exception
             EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos1", ex.Message)
@@ -140,11 +141,11 @@ Module Traspasos
                 Console.WriteLine(My.Settings.RutaExecutables)
                 Console.WriteLine(r.AnexoCon & " - " & r.CicloPagare)
                 If Directory.Exists(My.Settings.RutaExecutables) Then
-                    Console.WriteLine("""" & My.Settings.RutaExecutables & "EstadoCuentaAVCC_test.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0")
+                    Console.WriteLine("""" & My.Settings.RutaExecutables & "EstadoCuentaAVCC.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0")
                     Shell("""" & My.Settings.RutaExecutables & "EstadoCuentaAVCC.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0", AppWinStyle.NormalFocus, True)
                 Else
-                    Console.WriteLine("""F:\Executables\EstadoCuentaAVCC_test.exe"" ")
-                    Shell("""F:\Executables\EstadoCuentaAVCC_test.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0", AppWinStyle.NormalFocus, True)
+                    Console.WriteLine("""F:\Executables\EstadoCuentaAVCC.exe"" ")
+                    Shell("""F:\Executables\EstadoCuentaAVCC.exe"" " & r.Anexo & " " & r.Ciclo & " FIN 0", AppWinStyle.NormalFocus, True)
                 End If
             Next
         Catch ex As Exception

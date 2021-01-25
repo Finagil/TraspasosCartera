@@ -57,8 +57,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SERVER-RAID2\DBRESPALDOS, 62887;Initial Catalog=ProductionTEST;Persis"& _ 
-            "t Security Info=True;User ID=User_PRO;Password=User_PRO2015")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=SERVER-RAID2;Initial Catalog=Production;Persist Security Info=True;Us"& _ 
+            "er ID=User_PRO;Password=User_PRO2015")>  _
         Public ReadOnly Property Production_Aux2CS() As String
             Get
                 Return CType(Me("Production_Aux2CS"),String)
@@ -103,7 +103,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("V:\Contratos$\Executables\test\")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("V:\Contratos$\Executables\")>  _
         Public Property RutaExecutables() As String
             Get
                 Return CType(Me("RutaExecutables"),String)
