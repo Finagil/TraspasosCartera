@@ -65,7 +65,7 @@ Module Traspasos
                 FijaTasa(r.Anexo, r.Ciclo, CadenaFecha(Fecha))
                 InteresDias = CalculaInteres(r)
                 TaS.Insert(r.Anexo, r.Ciclo, r.Imp + r.Fega + r.Intereses + InteresDias, r.Imp, r.Intereses, r.Garantia, r.Tipar, r.Fega, Fecha, InteresDias)
-                TaS.FacturaInteresesIAV(r.Anexo, r.Ciclo) 'falta ver donde facturarmos interes y capital traspasado
+                ' se factura en Sub FacturarCFDI_AV(FechaProc As Date) en GeneraCFDI33
             Next
         Catch ex As Exception
             EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos1", ex.Message)
