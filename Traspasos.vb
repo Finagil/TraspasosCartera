@@ -46,6 +46,7 @@ Module Traspasos
 
     Sub TraspasosAvio(Fecha As String, Tipo As String)
         Try
+            Dim Dias As Integer
             Dim InteresDias As Decimal = 0
             Dim TaS As New ProduccionDSTableAdapters.TraspasosAvioCCTableAdapter
             Dim ta As New ProduccionDSTableAdapters.SaldosAvioCCTableAdapter
@@ -63,9 +64,10 @@ Module Traspasos
                 Console.WriteLine(r.AnexoCon & " - " & r.CicloPagare)
                 Contador += 1
                 FijaTasa(r.Anexo, r.Ciclo, CadenaFecha(Fecha))
-                InteresDias = CalculaInteres(r)
-                TaS.Insert(r.Anexo, r.Ciclo, r.Imp + r.Fega + r.Intereses + InteresDias, r.Imp, r.Intereses, r.Garantia, r.Tipar, r.Fega, Fecha, InteresDias)
-                ' se factura en Sub FacturarCFDI_AV(FechaProc As Date) en GeneraCFDI33
+                InteresDias = CalculaInteres(r, Dias)
+                TaS.Insert(r.Anexo, r.Ciclo, r.Imp + r.Fega + r.Intereses + InteresDias, r.Imp, r.Intereses, r.Garantia, r.Tipar, r.Fega, Fecha, InteresDias, True, "IAV", 0)
+                TaS.FacturaInteresesIAV(r.Anexo, r.Ciclo)
+                'ya no se factura en el traspaso, se factura como 'PAG_IAV'
             Next
         Catch ex As Exception
             EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos1", ex.Message)
@@ -116,8 +118,7 @@ Module Traspasos
         Return ff
     End Function
 
-    Function CalculaInteres(ByVal r As ProduccionDS.SaldosAvioCCRow)
-        Dim dias As Integer = 0
+    Function CalculaInteres(ByVal r As ProduccionDS.SaldosAvioCCRow, ByRef dias As Integer)
         Dim Inte As Decimal = 0
         dias = DateDiff(DateInterval.Day, CadenaFecha(r.FechaFinal), CadenaFecha(r.FechaTerminacion))
         If dias < 0 Then dias = 0
