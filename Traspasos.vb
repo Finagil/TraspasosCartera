@@ -52,6 +52,10 @@ Module Traspasos
             Dim ta As New ProduccionDSTableAdapters.SaldosAvioCCTableAdapter
             Dim T As New ProduccionDS.SaldosAvioCCDataTable
             Dim r As ProduccionDS.SaldosAvioCCRow
+            Dim FechaIni, FechaFin As String
+
+            FechaIni = Fecha.Substring(0, 6) + "01"
+            FechaFin = Fecha.Substring(0, 6) + "31"
 
             If Tipo = "H" Then
                 TaS.DeleteFechaAvio(Fecha)
@@ -64,8 +68,8 @@ Module Traspasos
                 Console.WriteLine(r.AnexoCon & " - " & r.CicloPagare)
                 Contador += 1
                 FijaTasa(r.Anexo, r.Ciclo, CadenaFecha(Fecha))
-                InteresDias = CalculaInteres(r, Dias)
-                TaS.Insert(r.Anexo, r.Ciclo, r.Imp + r.Fega + r.Intereses + InteresDias, r.Imp, r.Intereses, r.Garantia, r.Tipar, r.Fega, Fecha, InteresDias, True, "IAV", 0)
+                InteresDias = TaS.sp_InetresMensualAVCC(r.Anexo, r.Ciclo, FechaIni, FechaFin) 'caclula es interes del mes
+                TaS.Insert(r.Anexo, r.Ciclo, r.Imp + r.Fega + r.Intereses, r.Imp, r.Intereses, r.Garantia, r.Tipar, r.Fega, Fecha, InteresDias, True, "IAV", 0)
                 TaS.FacturaInteresesIAV(r.Anexo, r.Ciclo)
                 'ya no se factura en el traspaso, se factura como 'PAG_IAV'
             Next
@@ -116,14 +120,6 @@ Module Traspasos
     Function CadenaFecha(ByVal f As String) As Date
         Dim ff As New System.DateTime(CInt(Mid(f, 1, 4)), Mid(f, 5, 2), Mid(f, 7, 2))
         Return ff
-    End Function
-
-    Function CalculaInteres(ByVal r As ProduccionDS.SaldosAvioCCRow, ByRef dias As Integer)
-        Dim Inte As Decimal = 0
-        dias = DateDiff(DateInterval.Day, CadenaFecha(r.FechaFinal), CadenaFecha(r.FechaTerminacion))
-        If dias < 0 Then dias = 0
-        Inte = Math.Round((r.Saldo) * (Tasa / 100 / 360) * dias, 2)
-        Return Inte
     End Function
 
     Sub Calcula_Saldos(Fecha As String, Tipo As String)
