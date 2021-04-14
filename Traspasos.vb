@@ -14,6 +14,7 @@ Module Traspasos
 
     Sub Main()
         Arg = Environment.GetCommandLineArgs()
+        Dim Tarde As String = ""
         Console.WriteLine("Iniciando ...")
         FechaD = TaTrasp.FechaAplicacion
         FechaD = FechaD.Date
@@ -23,8 +24,14 @@ Module Traspasos
                 CorreTraspasos(True)
             End If
         End If
+        If Arg.Length > 2 Then
+            If Arg(2) = "TRASPASA" Then
+                Tarde = Arg(2)
+            End If
+        End If
 
-        If Date.Now.Hour > 18 Then ' LOS TRAPASOS SE EJECUTAN POR LA TARDE
+        If Date.Now.Hour > 18 Or Tarde = "TRASPASA" Then ' LOS TRAPASOS SE EJECUTAN POR LA TARDE
+            Console.WriteLine("LOS TRAPASOS POR LA TARDE")
             If Date.Now.DayOfWeek = DayOfWeek.Sunday Or Date.Now.DayOfWeek = DayOfWeek.Saturday Then
                 ' no se generan traspasos
             ElseIf FechaD.DayOfWeek = DayOfWeek.Monday Then
