@@ -14,7 +14,6 @@ Module Traspasos
 
     Sub Main()
         Arg = Environment.GetCommandLineArgs()
-        Dim Tarde As String = ""
         Console.WriteLine("Iniciando ...")
         FechaD = TaTrasp.FechaAplicacion
         FechaD = FechaD.Date
@@ -22,31 +21,27 @@ Module Traspasos
         If Arg.Length > 1 Then
             If Arg(1) = "V" Then
                 CorreTraspasos(True)
-            End If
-        End If
-        If Arg.Length > 2 Then
-            If Arg(2) = "TRASPASA" Then
-                Tarde = Arg(2)
+            ElseIf Arg(1) = "CIERRE_DIARIO" Then
+                Console.WriteLine("CARTERA VENCIDA")
+                CorreTraspasos(True)
+                Console.WriteLine(Arg(1))
+                If Date.Now.DayOfWeek = DayOfWeek.Sunday Or Date.Now.DayOfWeek = DayOfWeek.Saturday Then
+                    ' no se generan traspasos
+                ElseIf FechaD.DayOfWeek = DayOfWeek.Monday Then
+                    ' el lunes se genneran traspasos de sabado y domingo
+                    FechaS = FechaD.AddDays(-2).Date.ToString("yyyyMMdd") ' sabado
+                    CorreTraspasos(False)
+                    FechaS = FechaD.AddDays(-1).Date.ToString("yyyyMMdd") ' Domingo
+                    CorreTraspasos(False)
+                    FechaS = FechaD.Date.ToString("yyyyMMdd") ' Lunes
+                    CorreTraspasos(False)
+                Else
+                    FechaS = FechaD.Date.ToString("yyyyMMdd")
+                    CorreTraspasos(False)
+                End If
             End If
         End If
 
-        If Date.Now.Hour > 18 Or Tarde = "TRASPASA" Then ' LOS TRAPASOS SE EJECUTAN POR LA TARDE
-            Console.WriteLine("LOS TRAPASOS POR LA TARDE")
-            If Date.Now.DayOfWeek = DayOfWeek.Sunday Or Date.Now.DayOfWeek = DayOfWeek.Saturday Then
-                ' no se generan traspasos
-            ElseIf FechaD.DayOfWeek = DayOfWeek.Monday Then
-                ' el lunes se genneran traspasos de sabado y domingo
-                FechaS = FechaD.AddDays(-2).Date.ToString("yyyyMMdd") ' sabado
-                CorreTraspasos(False)
-                FechaS = FechaD.AddDays(-1).Date.ToString("yyyyMMdd") ' Domingo
-                CorreTraspasos(False)
-                FechaS = FechaD.Date.ToString("yyyyMMdd") ' Lunes
-                CorreTraspasos(False)
-            Else
-                FechaS = FechaD.Date.ToString("yyyyMMdd")
-                CorreTraspasos(False)
-            End If
-        End If
         Console.WriteLine("Terminado ...")
         EnviaError("ecacerest@lamoderna.com.mx", "Ejecucion de Traspasos " & FechaS & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
     End Sub
