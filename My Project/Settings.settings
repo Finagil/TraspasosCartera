@@ -14,7 +14,7 @@
       <Value Profile="(Default)">smtp85.cmoderna.com</Value>
     </Setting>
     <Setting Name="SMTP_port" Type="System.String" Scope="User">
-      <Value Profile="(Default)">26</Value>
+      <Value Profile="(Default)">465</Value>
     </Setting>
     <Setting Name="SMTP_creden" Type="System.String" Scope="User">
       <Value Profile="(Default)">ecacerest,h3Pd1BsQ,cmoderna</Value>

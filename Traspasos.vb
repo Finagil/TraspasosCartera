@@ -22,6 +22,7 @@ Module Traspasos
             If Arg(1) = "V" Then
                 CorreTraspasos(True)
             ElseIf Arg(1) = "CIERRE_DIARIO" Then
+                EnviaError("ecacerest@cmoderna.com", "Inicio de Ejecucion de Traspasos", "Ejecucion de Traspasos " & Date.Now.ToString)
                 Console.WriteLine("CARTERA VENCIDA")
                 CorreTraspasos(True)
                 Console.WriteLine(Arg(1))
@@ -43,7 +44,7 @@ Module Traspasos
         End If
 
         Console.WriteLine("Terminado ...")
-        EnviaError("ecacerest@lamoderna.com.mx", "Ejecucion de Traspasos " & FechaS & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
+        EnviaError("ecacerest@cmoderna.com", "Ejecucion de Traspasos " & FechaS & " = " & Contador, "Ejecucion de Traspasos " & Date.Now.ToString)
     End Sub
 
     Sub TraspasosAvio(Fecha As String, Tipo As String)
@@ -76,20 +77,20 @@ Module Traspasos
                 'ya no se factura en el traspaso, se factura como 'PAG_IAV'
             Next
         Catch ex As Exception
-            EnviaError("ecacerest@lamoderna.com.mx", "Error en traspasos1", ex.Message)
+            EnviaError("ecacerest@cmoderna.com", "Error en traspasos1", ex.Message)
         End Try
     End Sub
 
     Private Sub EnviaError(ByVal Para As String, ByVal Mensaje As String, ByVal Asunto As String)
         If InStr(Mensaje, Asunto) = 0 Then
-            Dim Mensage As New MailMessage("TraspasosAvio@cmoderna.com", Trim(Para), Trim(Asunto), Mensaje)
+            Dim Mensage As New MailMessage("Notificaciones@cmoderna.com", Trim(Para), Trim(Asunto), Mensaje)
             Dim Cliente As New SmtpClient(My.Settings.SMTP, My.Settings.SMTP_port)
             Try
                 Dim Credenciales As String() = My.Settings.SMTP_creden.Split(",")
                 Cliente.Credentials = New System.Net.NetworkCredential(Credenciales(0), Credenciales(1), Credenciales(2))
                 Cliente.Send(Mensage)
             Catch ex As Exception
-                'ReportError(ex)
+                Console.WriteLine(ex)
             End Try
         Else
             Console.WriteLine("No se ha encontrado la ruta de acceso de la red")
